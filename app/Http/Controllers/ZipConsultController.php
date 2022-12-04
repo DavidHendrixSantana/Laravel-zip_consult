@@ -11,6 +11,13 @@ class ZipConsultController extends Controller
 
         //Consult the Zip Code withm the consult return 
         $zipCode = ZipCode::where('zip_code', $zip_code)->with('FederalEntity','Settlement', 'Municipality')->first();
-        return $zipCode;
+         
+        if($zipCode)
+        {
+            return $zipCode;
+        }else{
+            abort(404);
+
+        }
     }
 }
