@@ -7,17 +7,25 @@ use App\Models\ZipCode;
 
 class ZipConsultController extends Controller
 {
-    public function zipConsult($zip_code){
 
-        //Consult the Zip Code withm the consult return 
+    /**
+     * Summary of zipConsult
+     * @param mixed $zip_code
+     * @param   int
+     */
+    public function zipConsult($zip_code){
+        if(gettype($zip_code)== 'integer')
+        {
+        //Consult the Zip Code  
         $zipCode = ZipCode::where('zip_code', $zip_code)->with('FederalEntity','Settlement', 'Municipality')->first();
          
-        if($zipCode)
-        {
             return $zipCode;
         }else{
             abort(404);
 
         }
+       
+
+
     }
 }
