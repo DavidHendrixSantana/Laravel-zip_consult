@@ -1,4 +1,4 @@
-URL of the project mounted: http://backbones.store/api/zip-codes
+URL of the project mounted: http://backbones.store/api/zip-codes/(zip_code)
 
 # zip_consult
 Project to solve the backbones system selection process.
