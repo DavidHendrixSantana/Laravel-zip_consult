@@ -11,9 +11,11 @@ class ZipConsultController extends Controller
     /**
      * Summary of zipConsult
      * @param mixed $zip_code
-     * @param   int
+     * @param   string
      */
     public function zipConsult($zip_code){
+        $zip_code = (int) $zip_code;
+
         if(gettype($zip_code)== 'integer')
         {
         //Consult the Zip Code  
