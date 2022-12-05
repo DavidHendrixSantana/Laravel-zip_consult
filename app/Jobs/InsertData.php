@@ -176,7 +176,7 @@ class InsertData implements ShouldQueue
         */
         foreach ($settlement_type as $field ) {
             SettlementType::create([
-                'name' => $field
+                'name' => $this->quitarAcentos($field)
             ]);
         }
 
@@ -186,7 +186,7 @@ class InsertData implements ShouldQueue
         foreach ($FederalEntitys as $fields ) {
             FederalEntity::create([
                 'key' => (int) $fields['key'],
-                'name' => strtoupper($fields['name']),
+                'name' => strtoupper($this->quitarAcentos($fields['name'])),
                 'code' => $fields['code']
             ]);
         }
@@ -197,7 +197,7 @@ class InsertData implements ShouldQueue
         foreach ($zipCodes as $fields ) {
             ZipCode::create([
                 'zip_code' => $fields['zip_code'],
-                'locality' => strtoupper($fields['locality']),
+                'locality' => strtoupper($this->quitarAcentos($fields['locality'])),
                 'federal_entity' => $fields['federal_entity'],
             ]);
         }
@@ -209,7 +209,7 @@ class InsertData implements ShouldQueue
         foreach ($municipality as $fields ) {
             Municipality::create([
                 'key' => (int) $fields['key'],
-                'name' => $fields['name'],
+                'name' => strtoupper($this->quitarAcentos($fields['name'])),
                 'zip_code' => $fields['zip_code']
             ]);
         }
@@ -220,12 +220,23 @@ class InsertData implements ShouldQueue
         foreach ($settlements as $fields ) {
             Settlement::create([
                 'key' =>  (int) $fields['key'],
-                'name' => strtoupper($fields['name']),
-                'zone_type' => $fields['zone_type'],
-                'settlement_type' => strtoupper($fields['settlement_type']),
+                'name' => strtoupper($this->quitarAcentos($fields['name'])),
+                'zone_type' => strtoupper($this->quitarAcentos($fields['zone_type'])),
+                'settlement_type' => strtoupper($this->quitarAcentos($fields['settlement_type'])),
                 'zip_code' => $fields['zip_code']
             ]);
         }
         DB::commit();
+    }
+
+    public function quitarAcentos($cadena){
+        $originales = 'ÁÉÍÓÚáéíóúÑñ';
+        $modificadas = 'AEIOUaeiou??';
+        $cadena = utf8_decode($cadena);
+        $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
+        return utf8_encode($cadena);
+
+
+
     }
 }

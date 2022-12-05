@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/test', [\App\Http\Controllers\MigrateDataController::class, 'insertData']);
 
+// Route::get('/acentos/{cadena}', [\App\Http\Controllers\MigrateDataController::class, 'quitarAcentos']);
+
 Route::get('/', function () {
     return view('welcome');
 });

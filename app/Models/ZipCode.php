@@ -21,7 +21,7 @@ class ZipCode extends Model
     public function Municipality(){
         return $this->belongsTo(Municipality::class, 'zip_code', 'zip_code');
     }
-    public function Settlement(){
+    public function Settlements(){
         return $this->hasMany(Settlement::class, 'zip_code', 'zip_code');
     }
 

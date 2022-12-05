@@ -19,7 +19,7 @@ class ZipConsultController extends Controller
         if(gettype($zip_code)== 'integer')
         {
         //Consult the Zip Code  
-        $zipCode = ZipCode::where('zip_code', $zip_code)->with('FederalEntity','Settlement', 'Municipality')->first();
+        $zipCode = ZipCode::where('zip_code', $zip_code)->with('FederalEntity','Settlements', 'Municipality')->first();
          
             return $zipCode;
         }else{
